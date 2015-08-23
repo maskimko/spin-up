@@ -6,9 +6,11 @@
 #
 # All rights reserved - Do Not Redistribute
 #
-execute "dnf upgrade"
+#execute "dnf upgrade"
+puts "Hello Chef cookbook"
+
 #package "apache2"
-execute "rm -rf /var/www"
+#execute "rm -rf /var/www"
 #link "/var/www" do
 #to "/vagrant"
 #end

@@ -69,7 +69,16 @@ Vagrant.configure(2) do |config|
   #   sudo apt-get update
   #   sudo apt-get install -y apache2
   # SHELL
-  config.vm.provision "shell", path: "bootstrap.sh"
-  config.vm.provision "chef_solo", run_list: ["app-cookbook", "wildfly"]
+  #config.vm.provision "shell", path: "bootstrap.sh"
+  #config.vm.provision "chef_solo", run_list: ["app-cookbook", "wildfly"]
+  config.vm.provision "shell" do |s|
+     s.path = "bootstrap.sh"
+  end
+  config.vm.provision "chef_solo" do |chef|
+     chef.add_recipe "app-cookbook"
+     chef.add_recipe "wildfly"
+
+  end
+
 
 end
