@@ -19,7 +19,7 @@ if systemctl list-unit-files | grep -q dkms.service; then
   sudo systemctl enable dkms
 fi
 
-sudo mount -o loop,ro ~/VBoxGuestAdditions.iso /mnt/
-sudo /mnt/VBoxLinuxAdditions.run || :
-sudo umount /mnt/
-rm -f ~/VBoxGuestAdditions.iso
+#sudo mount -o loop,ro ~/VBoxGuestAdditions.iso /mnt/
+#sudo /mnt/VBoxLinuxAdditions.run || :
+#sudo umount /mnt/
+#rm -f ~/VBoxGuestAdditions.iso
