@@ -11,7 +11,7 @@ case node["platform"]
     zypper_repo "#{node['zabbix']['repo_alias']}" do
       repo "#{node['zabbix']['zabbix_repo']}"
     end
-  when "redhat"
+  when "redhat", "centos" then
     remote_file node['zabbix']['file_path'] do
       source "#{node['zabbix']['zabbix_repo']}"
       not_if "rpm -qa | grep 'zabbix-release'"
@@ -74,7 +74,12 @@ case node["platform"]
     Chef::Log.info "#{node['platform']} is not supported yet."
 end
 
-package 'zabbix-agent' if platform_family?("suse", "rhel", "debian")
+puts node["platform"]
+if node["platform"] == "centos" then
+    package 'zabbix22-agent' 
+else 
+    package 'zabbix-agent' if platform_family?("suse", "rhel", "debian")
+end
 
 template node['zabbix']['zabbix_agent']['config_path'] do
   source "#{node['zabbix']['zabbix_agent']['config_template']}"
@@ -97,6 +102,18 @@ if platform_family?("windows")
     only_if { ::File.exist?("#{node['zabbix']['zabbix_agent']['install_target']}/zabbix_agentd.exe") }
   end
 else
+    if node["platform"] == "centos" then
+        execute 'fix_config_perm' do
+            command "sudo chmod 664 /etc/zabbix_agentd.conf"
+        end
+        directory '/etc/zabbix/zabbix_agentd.d' do
+            owner 'root'
+            group 'root'
+            mode '0755'
+            action :create
+        end
+    end
+
   service node['zabbix']['zabbix_agent']['name'] do
     action [:enable, :start]
   end

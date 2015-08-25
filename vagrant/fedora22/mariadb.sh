@@ -6,7 +6,7 @@ else
     echo -e "\e[0;32m\tmariadb-server has been installed before\e[0m"
 fi
 
-
+sudo systemctl enable mariadb.service
 systemctl status mariadb.service
 if [ $? -ne 0 ]; then 
     sudo systemctl start mariadb.service

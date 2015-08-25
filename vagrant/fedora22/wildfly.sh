@@ -1,4 +1,5 @@
 #!/bin/bash
+set -x
 WILDFLY_FILENAME="wildfly-9.0.1.Final.tar.gz"
 
 #Downloading java
@@ -12,4 +13,7 @@ sudo mkdir /opt/wildfly
 
 pushd /opt/wildfly
 sudo tar -zxf $WILDFLY_LOCATION
+popd
+
+set +x
 

@@ -37,7 +37,7 @@ case node["platform"]
     default['zabbix']['zabbix_repo'] = 'http://download.opensuse.org/repositories/server:/monitoring/SLE_11_SP3/'
     default['zabbix']['zabbix_agent']['name'] = 'zabbix-agentd'
     default['zabbix']['zabbix_agent']['config_path']    = '/etc/zabbix/zabbix-agentd.conf'
-  when "redhat"
+  when "redhat", "centos" then
     default['zabbix']['zabbix_repo'] = 'http://repo.zabbix.com/zabbix/' +
         "#{node['zabbix']['zabbix_release']}/rhel/#{node['platform_version'].to_i}/" +
         "#{node[:kernel][:machine]}/zabbix-release-#{node['zabbix']['zabbix_release']}" +

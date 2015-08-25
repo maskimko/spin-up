@@ -6,7 +6,7 @@
 #
 # All rights reserved - Do Not Redistribute
 #
-if node["platform"] == "suse"
+if node["platform"] == "suse" or node["platform"] == "centos"
   include_recipe "database::mysql"
 
   zypper_repo "#{node['zabbix']['repo_alias']}" do
