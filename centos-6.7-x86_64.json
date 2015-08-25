@@ -42,7 +42,7 @@
   "variables": {
     "compression_level": "6",
     "cpus": "1",
-    "disk_size": "40000",
+    "disk_size": "5000",
     "headless": "false",
     "memory": "512",
     "mirror": "http://mirrors.kernel.org/centos"
