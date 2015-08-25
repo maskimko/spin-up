@@ -2,7 +2,6 @@
 
 set -e
 set -x
-
 sudo yum -y install bzip2
 sudo yum -y --enablerepo=epel install dkms
 sudo yum -y install kernel-devel
@@ -19,7 +18,3 @@ if systemctl list-unit-files | grep -q dkms.service; then
   sudo systemctl enable dkms
 fi
 
-#sudo mount -o loop,ro ~/VBoxGuestAdditions.iso /mnt/
-#sudo /mnt/VBoxLinuxAdditions.run || :
-#sudo umount /mnt/
-#rm -f ~/VBoxGuestAdditions.iso

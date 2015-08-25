@@ -1,11 +1,11 @@
 {
   "builders": [{
     "type": "qemu",
-    "iso_url": "{{user `mirror`}}/7.1.1503/isos/x86_64/CentOS-7-x86_64-NetInstall-1503.iso",
-    "iso_checksum": "498bb78789ddc7973fe14358822eb1b48521bbaca91c17bd132c7f8c903d79b3",
+    "iso_url": "{{user `mirror`}}/6.7/isos/x86_64/CentOS-6.7-x86_64-minimal.iso",
+    "iso_checksum": "9d3fec5897be6b3fed4d3dda80b8fa7bb62c616bbfd4bdcd27295ca9b764f498",
     "iso_checksum_type": "sha256",
-    "output_directory": "output-centos-7.1-x86_64",
-    "vm_name": "packer-centos-7.1-x86_64",
+    "output_directory": "output-centos-6.7-x86_64",
+    "vm_name": "packer-centos-6.7-x86_64",
     "disk_size": "{{user `disk_size`}}",
     "headless": "{{user `headless`}}",
     "http_directory": "http",
@@ -13,35 +13,36 @@
     "boot_command": [
       "<esc>",
       "<wait>",
-      "linux inst.ks=http://{{.HTTPIP}}:{{.HTTPPort}}/centos-7.1/anaconda-ks.cfg biosdevname=0 net.ifnames=0",
+      "linux ks=http://{{.HTTPIP}}:{{.HTTPPort}}/centos-6.7/anaconda-ks.cfg",
       "<enter>"
     ],
     "ssh_wait_timeout": "60m",
     "ssh_username": "vagrant",
     "ssh_password": "vagrant",
-    "shutdown_command": "sudo systemctl poweroff"
+    "shutdown_command": "sudo poweroff"
   }],
   "provisioners": [{
     "type": "shell",
     "scripts": [
-      "scripts/centos-7.1/repo.sh",
+      "scripts/centos-6.7/repo.sh",
+      "scripts/centos-6.7/init.sh",
       "scripts/centos/dkms.sh",
       "scripts/common/vagrant.sh",
       "scripts/common/sshd.sh",
-      "scripts/centos-7.1/locale.sh",
-      "scripts/centos-7.1/cleanup.sh",
+      "scripts/centos-6.7/locale.sh",
+      "scripts/centos-6.7/cleanup.sh",
       "scripts/common/minimize.sh"
     ]
   }],
   "post-processors": [{
     "type": "vagrant",
     "compression_level": "{{user `compression_level`}}",
-    "output": "centos-7.1-x86_64.box"
+    "output": "centos-6.7-x86_64.box"
   }],
   "variables": {
     "compression_level": "6",
     "cpus": "1",
-    "disk_size": "5000",
+    "disk_size": "40000",
     "headless": "false",
     "memory": "512",
     "mirror": "http://mirrors.kernel.org/centos"

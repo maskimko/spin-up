@@ -5,4 +5,5 @@ packer_cache/*
 *.pwi
 packer_cache/*
 .vagrant/*
+output-*
 
