@@ -86,10 +86,15 @@ Vagrant.configure(2) do |config|
      chef.version = "12.3.0"
      #chef.add_recipe "app-cookbook"
      chef.add_recipe "selinux::permissive"
+     chef.add_recipe "yum-epel"
+     #chef.add_recipe "database::mysql"
+     chef.add_recipe "mysql::server"
      chef.add_recipe "zabbix"
+     chef.add_recipe "zabbix::database"
+     chef.add_recipe "zabbix::server"
    #  chef.add_recipe "zabbix2::server"
    #  chef.add_recipe "zabbix-monitor"
-   #  chef.add_recipe "wildfly"
+     chef.add_recipe "wildfly"
   end
 
 end

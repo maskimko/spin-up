@@ -50,6 +50,9 @@ php_value always_populate_raw_post_data -1
 
 EOF
 
+echo -e "\e[0;33mDisabling selinux for zabbix server\e[0m"
+sudo setenforce 0
+
 echo -e "\e[0;33mEnabling zabbix-server\e[0m"
 sudo systemctl enable zabbix-server.service
 systemctl status zabbix-server.service
@@ -82,4 +85,13 @@ if [ $? -ne 0 ]; then
 else
     echo -e "\e[0;32m\tzabbix-agent has been started before\e[0m"
 fi
+
+
+echo -e "\e[0;33mEnabling zabbix server monitoring\e[0m"
+mysql -uroot zabbix << EOF
+ update hosts set status = 0 where hostid = (select hostid from hosts_groups where groupid =(select groupid from groups where name='Zabbix servers'));
+EOF
+[ $? -eq 0 ] || echo -e "\e[0;31mCannot execute MySQL update\e[0m"
+
+
 

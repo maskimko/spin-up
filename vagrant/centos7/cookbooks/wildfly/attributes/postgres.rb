@@ -18,7 +18,7 @@
 
 # => PostgreSQL Database Configuration
 # => PostgreSQL driver
-default['wildfly']['postgresql']['enabled'] = true
+default['wildfly']['postgresql']['enabled'] = false
 default['wildfly']['postgresql']['url'] = 'http://central.maven.org/maven2/org/postgresql/postgresql/9.3-1102-jdbc41/postgresql-9.3-1102-jdbc41.jar'
 default['wildfly']['postgresql']['checksum'] = 'c4530047d03bac8295a9c19fbd7b893b5981edbcd8e52e1597fa2385deec272f'
 
