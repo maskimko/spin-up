@@ -42,7 +42,7 @@ EnvironmentFile=-/etc/sysconfig/wildfly
 User=wildfly
 LimitNOFILE=102642
 PIDFile=/var/run/wildfly/wildfly.pid
-ExecStart=/usr/share/wildfly/bin/launch.sh \$WILDFLY_MODE \$WILDFLY_CONFIG \$WILDFLY_BIND \$WILDFLY_MANAGEMENT_BIND 
+ExecStart=/opt/wildfly/bin/launch.sh \$WILDFLY_MODE \$WILDFLY_CONFIG \$WILDFLY_BIND \$WILDFLY_MANAGEMENT_BIND 
 #StandardOutput=null
 
 [Install]
@@ -54,7 +54,7 @@ cat > /opt/wildfly/bin/launch.sh << EOF
 #!/bin/sh
 
 if [ "x\$WILDFLY_HOME" = "x" ]; then
-    WILDFLY_HOME="/usr/share/wildfly"
+    WILDFLY_HOME="/opt/wildfly"
 fi
 if [ \$# -eq 4 ]; then 
     if [[ "\$1" == "domain" ]]; then
@@ -96,9 +96,10 @@ sudo useradd -d /opt/wildfly -s /sbin/nologin -c "The WildFly Application Server
 
 
 echo -e "\e[0;32mUpdating permissions \e[0m"
-sudo chown -HR /opt/wildlfy
+sudo chown -HR wildfly:wildfly /opt/wildfly
 
 echo -e "\e[0;32mEnabling and starting wildfly service\e[0m"
+sudo systemctl daemon-reload
 sudo systemctl enable wildfly.service
 sudo systemctl start wildfly.service
 
