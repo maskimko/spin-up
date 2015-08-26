@@ -14,7 +14,7 @@ pushd /usr/share/zabbix-mysql
  mysql -uroot zabbix < images.sql
  mysql -uroot zabbix < data.sql
 popd
-sudo sed  '/[# ]\+DBPassword *=/ s/^#\+ *//; /DBPassword/ s/DBPassword=.*$/DBPassword=zabbix/' /etc/zabbix_server.conf
+sudo sed -i '/[# ]\+DBPassword *=/ s/^#\+ *//; /DBPassword/ s/DBPassword=.*$/DBPassword=zabbix/' /etc/zabbix_server.conf
 
 cat > /etc/zabbix/web/zabbix.conf.php << EOF
 <?php
@@ -50,8 +50,11 @@ php_value always_populate_raw_post_data -1
 
 EOF
 
-echo -e "\e[0;33mDisabling selinux for zabbix server\e[0m"
+echo -e "\e[0;33mSwitching to selinux permissive mode for zabbix server\e[0m"
 sudo setenforce 0
+sudo setsebool -P httpd_can_network_connect=true
+sudo sudo semodule -i /vagrant/zabbix.pp
+
 
 echo -e "\e[0;33mEnabling zabbix-server\e[0m"
 sudo systemctl enable zabbix-server.service

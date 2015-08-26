@@ -1,6 +1,8 @@
 #!/bin/bash 
 : ${INSTALL_RVM:="false"}
 echo -e "\e[0;32mStarting bash provisioning\e[0m"
+echo -e "\e[0;32mPreparing environment\e[0m"
+    . /vagrant/environment.sh
 echo "Installing ruby gpg tar vim-enhanced net-tools"
     sudo dnf -y install ruby gnupg tar vim-enhanced net-tools
 #Installing rvm ruby
@@ -15,6 +17,8 @@ echo "Installing Ruby version 1.9"
     rvm install 1.9
 echo "Using needed version"
     rvm use 1.9
+else 
+    echo -e "\e[0;31mI skip rvm installation, due to bash bootstrapping\e[0m"
 fi
 #Disable selinux
 sudo setenforce 0
@@ -26,7 +30,7 @@ echo -e "\e[0;32mInstalling and configuring Zabbix\e[0m"
     . /vagrant/zabbix.sh
 echo -e "\e[0;32mInstalling Jmeter\e[0m"
     . /vagrant/jmeter.sh
-echo -e "\e[0;32mPreparing environment\e[0m"
-    . /vagrant/environment.sh
+echo -e "\e[0;32mInstalling Wildfly\e[0m"
+    . /vagrant/wildfly.sh
 echo -e "\e[0;33mEnd of provisioning script\e[0m"
 

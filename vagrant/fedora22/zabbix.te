@@ -1,0 +1,81 @@
+
+module zabbix 1.0;
+
+require {
+	type unlabeled_t;
+	type locale_t;
+	type zabbix_port_t;
+	type usr_t;
+	type mysqld_t;
+	type var_lib_t;
+	type mysqld_var_run_t;
+	type proc_t;
+	type mysqld_db_t;
+	type var_t;
+	type httpd_t;
+	class unix_stream_socket { write connectto setopt shutdown read create connect };
+	class tcp_socket { name_connect create connect };
+	class file { getattr read open append };
+	class sock_file write;
+	class sem { read write unix_write };
+	class lnk_file read;
+	class dir search;
+}
+
+#============= httpd_t ==============
+
+#!!!! This avc is allowed in the current policy
+allow httpd_t zabbix_port_t:tcp_socket name_connect;
+
+#============= unlabeled_t ==============
+
+#!!!! This avc is allowed in the current policy
+allow unlabeled_t locale_t:dir search;
+
+#!!!! This avc is allowed in the current policy
+allow unlabeled_t locale_t:file getattr;
+
+#!!!! This avc is allowed in the current policy
+allow unlabeled_t locale_t:lnk_file read;
+
+#!!!! This avc is allowed in the current policy
+allow unlabeled_t mysqld_db_t:dir search;
+
+#!!!! This avc is allowed in the current policy
+allow unlabeled_t mysqld_t:unix_stream_socket connectto;
+
+#!!!! This avc is allowed in the current policy
+allow unlabeled_t mysqld_var_run_t:sock_file write;
+
+#!!!! This avc is allowed in the current policy
+allow unlabeled_t proc_t:dir search;
+
+#!!!! This avc is allowed in the current policy
+allow unlabeled_t proc_t:file { read getattr open };
+
+#!!!! This avc is allowed in the current policy
+allow unlabeled_t self:dir search;
+
+#!!!! This avc is allowed in the current policy
+allow unlabeled_t self:file { read getattr open append };
+
+#!!!! This avc is allowed in the current policy
+allow unlabeled_t self:sem { read write unix_write };
+
+#!!!! This avc is allowed in the current policy
+allow unlabeled_t self:tcp_socket { create connect };
+
+#!!!! This avc is allowed in the current policy
+allow unlabeled_t self:unix_stream_socket { write setopt shutdown read create connect };
+
+#!!!! This avc is allowed in the current policy
+allow unlabeled_t usr_t:dir search;
+
+#!!!! This avc is allowed in the current policy
+allow unlabeled_t var_lib_t:dir search;
+
+#!!!! This avc is allowed in the current policy
+allow unlabeled_t var_t:dir search;
+
+#!!!! This avc is allowed in the current policy
+allow unlabeled_t zabbix_port_t:tcp_socket name_connect;

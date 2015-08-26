@@ -2,6 +2,11 @@
 USERNAME="maskimko"
 USERSHELL="/bin/bash"
 USERHOME="/home/maskimko"
+WILDFLYUSER="admin"
+WILDFLYPASSWORD="wildfly"
+WILDFLYPASSWORDHASH="1e18cb0cecd662fcf67ec0d200abe57f"
+export WILDFLYUSER WILDFLYPASSWORDHASH
+
 if [ -z "$(sudo grep $USERNAME /etc/passwd)" ]; then
     sudo useradd -m -d $USERHOME -s $USERSHELL -G vagrant,wheel $USERNAME
     #Password hash $6$xwEV7BT6$6xIoQ9OnxmrRsCi51ZVxvSVVEWg4/7JvcIiGILdJUQzYZbN40nrZLB.W1OHvqvhucN9NqBYPyfn46I3MGs7sx0
