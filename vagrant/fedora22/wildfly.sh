@@ -111,6 +111,8 @@ git clone https://github.com/maskimko/Greeter.git
 pushd Greeter
 echo -e "\e[0;32mDeploying the greater\e[0m"
 mvn package
+#maven wildfly plugin does not work correctly with wildfly 9.0.1 =(
+sudo cp target/Greeter-0.3.war /opt/wildfly/standalone/deployments/
 popd
 
 echo -e "\e[0;32mConfiguring apache welcome\e[0m"
