@@ -103,9 +103,17 @@ sudo systemctl daemon-reload
 sudo systemctl enable wildfly.service
 sudo systemctl start wildfly.service
 
+#sudo cp /vagrant/Greeter-0.3.war /opt/wildfly/standalone/deployments/
+sudo dnf -y install maven git
+
+echo -e "\e[0;32mCloning the greater git repo\e[0m"
+git clone https://github.com/maskimko/Greeter.git
+pushd Greeter
 echo -e "\e[0;32mDeploying the greater\e[0m"
-sudo cp /vagrant/Greeter-0.2.war /opt/wildfly/standalone/deployments/
+mvn deploy
+popd
+
 echo -e "\e[0;32mConfiguring apache welcome\e[0m"
-sudo  sed -i '/<body>/ a <script type="text/javascript">\nvar ip = location.host;\nwindow.location.replace("http://"+ip+":8080/Greeter-0.2");\n</script>' /usr/share/httpd/noindex/index.html
+sudo  sed -i '/<body>/ a <script type="text/javascript">\nvar ip = location.host;\nwindow.location.replace("http://"+ip+":8080/Greeter-0.3");\n</script>' /usr/share/httpd/noindex/index.html
 
 fi
