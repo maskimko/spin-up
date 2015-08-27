@@ -5,7 +5,8 @@ USERHOME="/home/maskimko"
 WILDFLYUSER="admin"
 WILDFLYPASSWORD="wildfly"
 WILDFLYPASSWORDHASH="1e18cb0cecd662fcf67ec0d200abe57f"
-export WILDFLYUSER WILDFLYPASSWORDHASH
+RUNSTRESSTEST="true"
+export WILDFLYUSER WILDFLYPASSWORDHASH RUNSTRESSTEST
 
 if [ -z "$(sudo grep $USERNAME /etc/passwd)" ]; then
     sudo useradd -m -d $USERHOME -s $USERSHELL -G vagrant,wheel $USERNAME
