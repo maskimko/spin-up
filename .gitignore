@@ -9,4 +9,5 @@ output-*
 *.swp
 vagrant/fedora22/test-data/*
 jmeter.log
+jmeter_exec_time.txt
 *.tar.gz
