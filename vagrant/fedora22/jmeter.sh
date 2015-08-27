@@ -5,6 +5,7 @@ PGP_LINK="https://www.apache.org/dist/jmeter/binaries/${JMETER_ARCHIVE}.asc"
 MD5_LINK="https://www.apache.org/dist/jmeter/binaries/${JMETER_ARCHIVE}.md5"
 TARBALL_LINK="http://apache.ip-connect.vn.ua//jmeter/binaries/${JMETER_ARCHIVE}"
 INSTALL_PATH="/opt"
+: ${TIMEOUT:=10}
 gpg --keyserver pgpkeys.mit.edu --recv-key 0612B399
 curl $PGP_LINK -L -o ${JMETER_ARCHIVE}.asc
 curl $MD5_LINK -L -o ${JMETER_ARCHIVE}.md5
@@ -35,7 +36,8 @@ if [ "$(md5sum ${JMETER_ARCHIVE} | cut -f 1 -d\  )" == "$(cat ${JMETER_ARCHIVE}.
         echo "Changing jmeter owner to current user $JMETER_USER"
         sudo chown -HR $JMETER_USER /opt/jmeter
 
-        echo "\e[0;32mLaunching jmeter stress test in $TIMEOUT seconds\e[0m"
+        echo -e "\e[0;32mLaunching jmeter stress test in $TIMEOUT seconds\e[0m"
+        sleep $TIMEOUT
         time /opt/jmeter/bin/jmeter -n -t /vagrant/WildflyResources.jmx 2>&1 | tee -a /vagrant/jmeter_exec_time.txt
         echo "\e[0;33mJmeter finish it's job\e[0m"
 else 
