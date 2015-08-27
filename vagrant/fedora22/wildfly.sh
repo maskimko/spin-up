@@ -110,7 +110,7 @@ echo -e "\e[0;32mCloning the greater git repo\e[0m"
 git clone https://github.com/maskimko/Greeter.git
 pushd Greeter
 echo -e "\e[0;32mDeploying the greater\e[0m"
-mvn deploy
+mvn package
 popd
 
 echo -e "\e[0;32mConfiguring apache welcome\e[0m"
