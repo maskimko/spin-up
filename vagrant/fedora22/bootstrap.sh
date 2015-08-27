@@ -28,9 +28,9 @@ echo -e "\e[0;32mInstalling and configuring MariaDB\e[0m"
     . /vagrant/mariadb.sh
 echo -e "\e[0;32mInstalling and configuring Zabbix\e[0m"
     . /vagrant/zabbix.sh
-echo -e "\e[0;32mInstalling Jmeter\e[0m"
-    . /vagrant/jmeter.sh
 echo -e "\e[0;32mInstalling Wildfly\e[0m"
     . /vagrant/wildfly.sh
+echo -e "\e[0;32mInstalling Jmeter\e[0m"
+    . /vagrant/jmeter.sh
 echo -e "\e[0;33mEnd of provisioning script\e[0m"
 

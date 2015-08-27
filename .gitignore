@@ -7,4 +7,6 @@ packer_cache/*
 vagrant/*/.vagrant/*
 output-*
 *.swp
+vagrant/fedora22/test-data/*
+jmeter.log
 *.tar.gz
