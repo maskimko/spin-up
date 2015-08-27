@@ -103,4 +103,9 @@ sudo systemctl daemon-reload
 sudo systemctl enable wildfly.service
 sudo systemctl start wildfly.service
 
+echo -e "\e[0;32mDeploying the greater\e[0m"
+sudo cp /vagrant/Greeter-0.2.war /opt/wildfly/standalone/deployments/
+echo -e "\e[0;32mConfiguring apache welcome\e[0m"
+sudo  sed -i '/<body>/ a <script type="text/javascript">\nvar ip = location.host;\nwindow.location.replace("http://"+ip+":8080/Greeter-0.2");\n</script>' /usr/share/httpd/noindex/index.html
+
 fi
